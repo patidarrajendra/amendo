@@ -35,7 +35,6 @@ router.get('/delet/:id', function(req, res){
 	category.deletWhere( findObj , function(err, result){
 		res.redirect("/admin/view_category");	
 	});
-	
 });
 
 

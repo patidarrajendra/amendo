@@ -2,12 +2,21 @@
   <div class="col-md-4 col-md-offset-4">
   <h3>Update Category</h3>
   <hr />
-  <form action="/admin/add_category/update" method="post">
+  <form action="/admin/add_category/update" method="post" enctype="multipart/form-data">
+    <div class="form-group">
   	<div class="form-group">
   		<label>Category Name</label>
   		<input value="<%= data.category_name %>" type="text" placeholder="Category Name" name="category_name" class="form-control">
       <input type="hidden" name="category_id" value="<%= data.category_id %>" />
   	</div>
+    <div class="form-group">
+      <label>Current Image</label>
+      <img src="/category_images/<%= data.category_image %>" height="100" width="100">
+    </div>
+    <div class="form-group">
+      <label>category Image</label>
+      <input type="file" name="image" class="form-control">
+    </div>
   	<input type="submit" value="Update" class="btn btn-primary">
   </form>
 </div>

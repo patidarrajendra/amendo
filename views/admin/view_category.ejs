@@ -5,6 +5,7 @@
   	<tr>
   		<th>S.No.</th>
   		<th>Category Name</th>
+      <th>Category Image</th>
   		<th>Edit</th>
   		<th>Delete</th>
   	</tr>
@@ -12,6 +13,7 @@
   		<tr>
   			<td><%= i+1 %></td>
   			<td><%= x.category_name %></td>
+        <td><img width="20px"" height="20px" src="/category_images/<%= x.category_image %>" ></td>
   			<td><a href="view_category/edit/<%= x.category_id %>" class="btn btn-sm btn-info">Edit</a></td>
   			<td><a href="/admin/view_category/delet/<%= x.category_id %>" data-toggle="modal" class="btn btn-sm btn-danger">Delete</a></td>
 

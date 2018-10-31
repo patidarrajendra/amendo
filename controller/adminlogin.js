@@ -26,7 +26,7 @@ router.post("/", function(req, res){
 			{
 				req.session.name = data.full_name;
 				req.session.uid = data.id;
-				req.session.is_user_logged_in = true;
+				req.session.is_admin_logged_in = true;
 				console.log('dashboard');
 					 //res.redirect("/dashboard");
 					 var pagedata = {title : "Welcome Admin", pagename : "admin/dashboard", message : req.flash('msg')};

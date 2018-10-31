@@ -12,8 +12,51 @@ module.exports.insert=function(obj, cb){
 
 module.exports.find=function(cb){
 	con.connect(function(err){
-       var que = "SELECT * FROM amendo_product";
+       var que = "SELECT * FROM  amendo_product";
        con.query(que,cb); 
+	});
+}
+
+module.exports.findWhere=function(obj,table, cb){
+	con.connect(function(err){
+		 var que= "SELECT *  FROM  amendo_product WHERE ";
+		 var counter=1;
+		 for(var k in obj){
+		 	if(counter==1)
+			{
+				que += k+"= '"+obj[k]+"'";
+			}
+			else
+			{
+				que += " AND "+k+"= '"+obj[k]+"' ";
+
+			}
+			counter++;
+		 }
+		 //console.log(que);
+		 con.query(que, cb);
+	});
+}
+
+module.exports.update=function(where, obj, cb)
+{
+	con.connect(function(err){
+	     var que= "UPDATE  amendo_product SET ";
+	     var counter=1;
+		 for(var k in obj){
+		 	if(counter==1)
+			{
+				que += k+"= '"+obj[k]+"'";
+			}
+			else
+			{
+				que += " , "+k+"= '"+obj[k]+"' ";
+
+			}
+			counter++;
+		 }
+		 que +=" WHERE product_id="+where.product_id ;
+		 con.query(que, cb);
 	});
 }
 

@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express();   
-
+ 
 
 var bodyParser = require('body-parser');
 var session = require('express-session');
@@ -17,25 +17,12 @@ app.set('views', 'views');
 app.use(express.static(__dirname+"/public"));
 app.use(bodyParser());
 app.use(cookieParser());
-app.use(session({ secret : "TSS"}));
+app.use(session({ secret : "TSS", saveUninitialized: true}));
 app.use(flash());
 app.use(cache());
 app.use(upload());
 app.use(cors())
-
-app.use(function(req, res, next){
-	res.locals.session = req.session;
-	res.locals.logo = "TSS";
-	var total = 0;
-	if(req.cookies.pid)
-	{
-		var pidstr = req.cookies.pid;
-		var arr = pidstr.split("#");
-		total = arr.length;
-	}
-	res.locals.total = total;
-	next();
-});
+//app.use(sha1());
 
 
 app.use(require("./config/routes"));

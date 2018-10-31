@@ -12,15 +12,10 @@ router.get("/", function(req, res){
 			var pagedata = { title : "View Category", pagename : "admin/view_product", data : result, catdata : result1};
 			res.render("admin_layout", pagedata);
 		})
-		// console.log(result);
-		
 	});
 	// product.findGetCate(function(err, result){
 	// 	console.log(result);
 	// })
-
-
-	
 });
 
 router.get("/delete/:id", function(req, res){
@@ -35,17 +30,20 @@ router.get("/delete/:id", function(req, res){
 });
 
 router.get("/update/:id", function(req, res){
-	console.log(req.query);
-	console.log(req.params);
+	// console.log(req.query);
+	// console.log(req.params);
 	var id = req.params.id;
-	res.send("delete");
-	product.findWhere({ _id : Mongodb.ObjectId(req.params.id) }, function(err, result){
+     var obj= { product_id : id };
+    var tableobj = {tablename:"amendo_product"} ; 
+	product.findWhere(obj, tableobj ,function(err, result){
 		var prodata=result[0];
-		// console.log(result);
-		category.find(function(err, result){
-			var pagedata = { title : "Update Product", pagename : "admin/update_product", prodata : prodata, catedata : result};
-			res.render("admin_layout", pagedata);
-		});
+		//console.log('hello');
+	category.find(function(err, result){
+		 
+	    var pagedata = { title : "Update Product", pagename : "admin/update_product", prodata : prodata, catedata : result};
+		res.render("admin_layout", pagedata);
+	});
+		
 		
 	});
 

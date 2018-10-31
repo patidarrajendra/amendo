@@ -2,10 +2,15 @@ var express = require('express');
 var router = express.Router();
 var sha1 = require('sha1');
 var api = require('../model/api');
+var path= require('path');
+var url = require('url');
+
+var adr = 'http://localhost:3000';
+var q = url.parse(adr, true);
 
 router.get("/",function(req,res){
-		
-     api.select(function(err,result){
+		 tableobj={tablename:'amendo_product'}  ; 
+     api.select(tableobj,function(err,result){
      	
      	res.send(result);
 
@@ -60,9 +65,7 @@ router.post("/insert", function(req, res){
          if(err)
            res.send(JSON.stringify({"msg":"fail"}));
          else
-           //"{results: [{'msg':success}]}";
-          res.send(JSON.stringify({"msg":"success"}));
-   
+           res.send(JSON.stringify({"msg":"success"}));
     });
 });
 
@@ -78,6 +81,26 @@ router.get("/single/:id",function(req,res){
     });
 });
 
+/* Get Category List */
+router.get("/list",function(req,res){
+     tableobj={tablename:'amendo_category'}  ; 
+     api.select(tableobj,function(err,result){
+      //obj=JSON.stringify(result);
+      //console.log(JSON.parse(JSON.stringify(result)));
+      // for(var k in result){
+        //console.log(k);
+        //if(result[k].category_image)
+        //{
+          //path.join(__dirname + '/app/index.html')  
+         //result[k].category_image =path.join('http://109.168.1:3000/category_image/' + result[k].category_image);
+        //}
+      // }
+       //console.log(result);
+      //console.log(path.join(__dirname + '/app/index.html'));
+      var response = JSON.stringify({"msg":"success","status":'200',"data":result});
+      res.send(response);
+   });
+});
 
 
 module.exports=router;

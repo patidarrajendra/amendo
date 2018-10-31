@@ -2,10 +2,10 @@ var con = require('../config/connect');
 var sha1 = require('sha1');
 
 
-module.exports.select= function(cb){
+module.exports.select= function(table , cb){
 	  con.connect(function(err){
 	  	    //console.log(obj);
-	  	   con.query("SELECT * FROM amendo_product",cb); 
+	  	   con.query("SELECT * FROM "+table.tablename,cb); 
 	  });
 } 
 

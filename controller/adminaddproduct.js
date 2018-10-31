@@ -44,24 +44,25 @@ router.post("/", function(req, res){
 });
 
 router.post("/update", function(req, res){
-	// console.log(req.body);
-	var id = req.body.id;
-	var image = req.body.image;
-	delete req.body.id;
-	delete req.body.image;
-	// console.log(req.files);
+	   //console.log(req.body);
+	var id = req.body.product_id;
+	var image = req.body.product_image;
+	delete req.body.product_id;
+	delete req.body.product_image;
+	 
 	if(req.files.image)//{}
 	{
 		var file = req.files.image;
 		var newname = changename(file.name);
 		var filepath = path.resolve("public/product_image/"+newname);
 		file.mv(filepath);
-		req.body.image = newname;
+		req.body.product_image = newname;
 		var oldfilepath = path.resolve("public/product_image/"+image);
-		fs.unlinkSync(oldfilepath);
+		if(fs.existsSync(oldfilepath))
+		   fs.unlinkSync(oldfilepath);
 
 	}
-	product.update({_id : Mongo.ObjectId(id)}, req.body, function(err, result){
+	product.update({product_id : id}, req.body, function(err, result){
 		res.redirect("/admin/view_product")
 	});
 });

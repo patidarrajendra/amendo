@@ -5,37 +5,39 @@
   <form action="/admin/add_product/update" method="post" enctype="multipart/form-data">
   	<div class="form-group">
   		<label>Product Name</label>
-  		<input type="text" placeholder="Product Name" name="name" value="<%= prodata.name %>" class="form-control">
+  		<input type="text" placeholder="Product Name" name="product_name" value="<%= prodata.product_name %>" class="form-control">
 
   	</div>
     <div class="form-group">
       <label>Current Image</label>
-      <img src="/product_image/<%= prodata.image %>" height="100" width="100">
+      <img src="/product_image/<%= prodata.product_image %>" height="100" width="100">
 
     </div>
+    
     <div class="form-group">
       <label>Product Image</label>
       <input type="file" name="image" class="form-control">
-
     </div>
+
     <div class="form-group">
       <label>Product Price</label>
-      <input value="<%= prodata.price %>" type="text" placeholder="Product Price" name="price" class="form-control">
+      <input value="<%= prodata.product_price %>" type="text" placeholder="Product Price" name="product_price" class="form-control">
 
     </div>
     
     <div class="form-group">
       <label>Product Category</label>
-      <select class="form-control" name="category">
+      <select class="form-control" name="category_id">
         <option>Select</option>
         <% catedata.forEach(function(x){ %>
-          <% if(prodata.category == x._id)
+
+          <% if(prodata.category_id == x.category_id)
           { %>
-            <option selected="selected" value="<%= x._id %>"><%= x.name %></option>
+            <option selected="selected" value="<%= x.category_id %>"><%= x.category_name %></option>
           <% }
           else
           { %>
-            <option value="<%= x._id %>"><%= x.name %></option>
+            <option value="<%= x.category_id %>"><%= x.category_name %></option>
          <% } %>
 
           
@@ -45,16 +47,16 @@
     </div>
     <div class="form-group">
       <label>Product Detail</label>
-      <textarea class="form-control" name="detail"><%= prodata.detail %></textarea>
+      <textarea class="form-control" name="product_description"><%= prodata.product_description %></textarea>
 
     </div>
     <div class="form-group">
       <label>Product Discount</label>
-      <input type="text" value="<%= prodata.discount %>" placeholder="Discount" name="discount" class="form-control">
+      <input type="text" value="<%= prodata.product_discount %>" placeholder="Discount" name="product_discount" class="form-control">
 
     </div>
-    <input type="hidden" name="id" value="<%= prodata._id %>" />
-    <input type="hidden" name="image" value="<%= prodata.image %>" />
+    <input type="hidden" name="product_id" value="<%= prodata.product_id %>" />
+    <input type="hidden" name="product_image" value="<%= prodata.product_image %>" />
   	<input type="submit" value="Add" class="btn btn-primary">
   </form>
 </div>
